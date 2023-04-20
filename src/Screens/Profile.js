@@ -61,7 +61,7 @@ const Profile = (props) => {
       setName("");
       setBio("");
       setWhatsapp("");
-      setImage("");
+      setImage(defaultImage);
     }
 
     console.log("cliquei github");
