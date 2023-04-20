@@ -11,27 +11,38 @@ import "./Profile.css";
 const Profile = (props) => {
   const defaultImage = "https://avatars.githubusercontent.com/u/60718584?v=4";
 
-  const [gitHubUser, setGitHubUser] = useState("");
+  //obter dados
+  const StorageData = JSON.parse(localStorage.getItem("userDate")) || {};
+
+  const [gitHubUser, setGitHubUser] = useState(StorageData.gitHubUser || "");
   const handleGitHubUserChange = (event) => {
     setGitHubUser(event.target.value);
   };
-  const [name, setName] = useState("");
+  const [name, setName] = useState(StorageData.name || "");
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
-  const [whatsapp, setWhatsapp] = useState("");
+  const [whatsapp, setWhatsapp] = useState(StorageData.whatsapp || "");
   const handleWhatsAppChange = (event) => {
     setWhatsapp(event.target.value);
   };
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState(StorageData.bio || "");
   const handleBioChange = (event) => {
     setBio(event.target.value);
+  };
+  const [image, setImage] = useState(StorageData.image || defaultImage);
+  const handleImageChange = (event) => {
+    setImage(event.target.value);
   };
 
   const getGitHub = () => {
     console.log("cliquei github");
   };
   const saveChanges = () => {
+    //dados dos campos
+    const userDate = { gitHubUser, name, whatsapp, bio, image };
+    //salvar localmente
+    localStorage.setItem("userDate", JSON.stringify(userDate));
     console.log("cliquei salvar");
   };
   return (
@@ -87,7 +98,7 @@ const Profile = (props) => {
           display: "flex",
           flex: 1,
           alignItems: "flex-end",
-          justifyContent: "space-around"
+          justifyContent: "space-around",
         }}
       >
         <Button onClick={getGitHub}>Buscar GitHub</Button>
