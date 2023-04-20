@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import axios from "axios";
 //estilo em texto
 import Typography from "@material-ui/core/Typography";
 //componente texto
 import TextField from "@material-ui/core/TextField";
 //botao
 import Button from "@material-ui/core/Button";
+//alert - plus feito por mim
+import Alert from "@mui/material/Alert";
 //css
 import "./Profile.css";
 
 const Profile = (props) => {
-  const defaultImage = "https://avatars.githubusercontent.com/u/60718584?v=4";
+  const defaultImage =
+    "https://cdn-icons-png.flaticon.com/512/16/16363.png?w=1060&t=st=1682014089~exp=1682014689~hmac=94e5fbf63dbfcd6c1a6e2d0d4728dae181af0fef63e3eee773bac852e1d28eab";
+
+  //alert 404
+  const [alertError, setAlertError] = useState(false);
 
   //obter dados
   const StorageData = JSON.parse(localStorage.getItem("userDate")) || {};
@@ -35,7 +42,28 @@ const Profile = (props) => {
     setImage(event.target.value);
   };
 
-  const getGitHub = () => {
+  const getGitHub = async () => {
+    //buscar user api github
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${gitHubUser}`
+      );
+
+      const {
+        data: { name, bio, avatar_url, followers, public_repos },
+      } = response;
+      console.log(bio);
+      setName(name);
+      setBio(bio);
+      setImage(avatar_url);
+    } catch (error) {
+      error.request.status === 404 ? setAlertError(true) : console.log();
+      setName("");
+      setBio("");
+      setWhatsapp("");
+      setImage("");
+    }
+
     console.log("cliquei github");
   };
   const saveChanges = () => {
@@ -51,7 +79,7 @@ const Profile = (props) => {
       <div className="Profile-info">
         <div className="Profile-picture-wrapper">
           <img
-            src={defaultImage}
+            src={image}
             alt="Foto de perfil"
             style={{ height: 140, width: 140 }}
           />
@@ -65,6 +93,16 @@ const Profile = (props) => {
               onChange={handleGitHubUserChange}
               label="Usuario do GitHub"
             />
+            {alertError && (
+              <Alert
+                severity="error"
+                onClose={() => {
+                  setAlertError(false);
+                }}
+              >
+                Usuário não encontrado
+              </Alert>
+            )}
             <TextField
               value={name}
               onChange={handleNameChange}
