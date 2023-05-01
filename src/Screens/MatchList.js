@@ -7,7 +7,7 @@ import MatchItem from "../Components/MatchItem";
 import InfoLine from "../Components/InfoLine";
 
 const MatchList = (props) => {
-  const matchlist = mockList;
+  const matchlist = JSON.parse(localStorage.getItem("matchList")) || {};
   const keys = Object.keys(matchlist);
 
   return (

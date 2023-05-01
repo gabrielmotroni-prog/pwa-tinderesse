@@ -10,6 +10,9 @@ import Button from "@material-ui/core/Button";
 import Alert from "@mui/material/Alert";
 //css
 import "./Profile.css";
+import { setUser } from "../Service/FireStore";
+//permisao push notification
+import { requestPermision } from "../Service/PushNotificatons";
 
 const Profile = (props) => {
   const defaultImage =
@@ -71,7 +74,11 @@ const Profile = (props) => {
     const userDate = { gitHubUser, name, whatsapp, bio, image };
     //salvar localmente
     localStorage.setItem("userDate", JSON.stringify(userDate));
+    //salvar no DB remoto
+    setUser(userDate);
     console.log("cliquei salvar");
+    //permisao para push notifications
+    requestPermision();
   };
   return (
     <div className="Profile-container">
