@@ -1,5 +1,5 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/messaging";
+import firebase from "firebase/app";
+import "firebase/messaging";
 import firebaseKeys from "./firebaseKeys.json";
 
 //requisicao de permissao - permissao de enviar notificao ao usuario
