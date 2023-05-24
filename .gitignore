@@ -24,5 +24,4 @@ yarn-error.log*
 
 firebaseKeys.json
 Service/firebaseKeys.json
-public/firebase-messaging-sw.js
 .env
