@@ -1,12 +1,11 @@
-import firebase from "firebase/app";
-import "firebase/messaging";
-import firebaseKeys from "./firebaseKeys.json";
+import { messaging } from "../firebaseConfig";
 
 //requisicao de permissao - permissao de enviar notificao ao usuario
 export const requestPermision = async () => {
   try {
     //pede permissao ao usuarios
-    const ms = firebase.messaging();
+    //const ms = firebase.messaging();
+    const ms = messaging;
 
     const permission = await Notification.requestPermission();
 

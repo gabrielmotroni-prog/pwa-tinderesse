@@ -1,16 +1,18 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import firebaseKeys from "./firebaseKeys.json";
+import { db } from "../../src/firebaseConfig";
 
 //iniciar firebase
-export const initiFirebase = () => {
-  firebase.initializeApp(firebaseKeys);
-};
+// export const initiFirebase = () => {
+//   firebase.initializeApp(firebaseKeys);
+// };
 
 //salvar usuario
 export const setUser = (user) => {
   //convensão para facilitar
-  const db = firebase.firestore();
+  //const db = firebase.firestore();
+
   //salvar nessa colecao. Caso nao tenha ele cria colecao.
   //chave primeira eh o gitHubUser
   //merge:  atualizar somente oq foi alterado
@@ -19,7 +21,8 @@ export const setUser = (user) => {
 
 //obter usuarios
 export const getUsers = async () => {
-  const db = firebase.firestore();
+  //const db = firebase.firestore();
+
   //obter toda colecao
   const querySnapshot = await db.collection("users").get();
   const users = {};
@@ -32,7 +35,7 @@ export const getUsers = async () => {
 
 // salvar em colecao de like
 export const likeUser = (user, myId) => {
-  const db = firebase.firestore();
+  //const db = firebase.firestore();
 
   const setObject = {};
   //dot notation
@@ -44,7 +47,8 @@ export const likeUser = (user, myId) => {
 
 //obter likes dos usuarios corrente
 export const checkLikes = async (myId) => {
-  const db = firebase.firestore();
+  //const db = firebase.firestore();
+
   const querySnapshot = await db.collection("likes").get();
 
   const likes =
@@ -56,7 +60,8 @@ export const checkLikes = async (myId) => {
 
 //registrar match
 export const setMatch = (matchUser, myId) => {
-  const db = firebase.firestore();
+  //const db = firebase.firestore();
+
   //usuario atual
   const newStudentMine = {};
   //usuario alvo match

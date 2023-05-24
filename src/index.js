@@ -4,10 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
-import { initiFirebase } from "./Service/FireStore";
+//import { initiFirebase } from "./Service/FireStore";
+import "./firebaseConfig"; //inicia firebase
 
 //inicia firebase
-initiFirebase();
+//initiFirebase();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
