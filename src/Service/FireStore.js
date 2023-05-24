@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import firebaseKeys from "./firebaseKeys.json";
+//import firebaseKeys from "./firebaseKeys.json";
 import { db } from "../../src/firebaseConfig";
 
 //iniciar firebase
